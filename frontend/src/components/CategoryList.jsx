@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 
 
 const CategoryList = () => {
     const [categoryProduct, setCategoryProduct] = useState([]);
     const [loading, setLoading] = useState(false);
+    const categoryLoading = new Array(9).fill(null)
 
     const fetchCategoryProduct = async () => {
         setLoading(true)
@@ -25,20 +27,40 @@ const CategoryList = () => {
     return (
         <div className="containar mx-auto p-4">
             <div className="flex items-center gap-4 justify-between overflow-scroll scrollbar-none">
-                {categoryProduct.map((product, index) => {
-                    return (
-                        <div className="">
-                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden p-3 bg-white flex items-center justify-center">
-                                <img className="h-full " src={product?.productImage[0]} alt="" />
+                {
+                    loading ? (
 
-                            </div>
-                            <div>
-                                <p className="text-center text-sm md:text-base">{product?.category}</p>
-                            </div>
-                        </div>
-                    )
+                        categoryLoading.map((el, index) => {
+                            return (
+                                <div className="animate-pulse h-16 w-16 md:w-20 md:h-20 rounded-full overflow-hidden bg-slate-200" key={"categoryLoading"+index}></div>
 
-                })}
+                            )
+
+
+                        })
+
+
+                    ) :
+                        (
+
+                            categoryProduct.map((product, index) => {
+                                return (
+                                    <Link key={product?.category} to={'/product-category/' + product?.category} className="cursor-pointer">
+                                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden p-4 bg-slate-200 flex items-center justify-center">
+                                            <img className="hover:scale-125 transition-all h-full mix-blend-multiply object-scale-down " src={product?.productImage[0]} alt="" />
+
+                                        </div>
+                                        <div>
+                                            <p className="text-center text-sm md:text-base capitalize">{product?.category}</p>
+                                        </div>
+                                    </Link>
+                                )
+
+                            })
+
+
+                        )
+                }
 
 
             </div>

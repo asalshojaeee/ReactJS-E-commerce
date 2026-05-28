@@ -14,6 +14,7 @@ import { AllUsers } from "./pages/AllUsers"
 import { AllProducts } from "./pages/AllProducts"
 import Header from "./components/Header"
 import Layout from "./components/Layout"
+import CategoryProduct from "./pages/CategoryProduct"
 function App() {
 
   const dispatch = useDispatch()
@@ -55,6 +56,9 @@ function App() {
 
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path='product-category/:categoryName' element={<CategoryProduct/>}/>
+
+         
    
           <Route path="/admin-panel" element={<AdminPanel />}>
 
