@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 
-
-
+import displayCurrency from '../helpers/displayCurrency'
+import { FaAngleRight } from 'react-icons/fa6'
+import { FaAngleLeft } from 'react-icons/fa6'
 
 const HorizontalCartProduct = ({ category, heading }) => {
     const [data, setData] = useState([])
@@ -29,9 +30,16 @@ const HorizontalCartProduct = ({ category, heading }) => {
 
 
     return (
-        <div className="containar mx-auto px-4 my-6">
+        <div className="containar mx-auto px-4 my-6 relative">
             <h2 className="text-2xl font-bold py-4">{heading}</h2>
-            <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex items-center gap-4 md:gap-6 overflow-scroll scrollbar-none">
+                <button
+                    className='bg-white shadow-md rounded-full p-1 absolute left-0 text-lg hidden md:block'><FaAngleLeft /></button>
+
+                <button
+                    className='bg-white shadow-md rounded-full p-1 absolute right-0 text-lg  hidden md:block'>
+                    <FaAngleRight />
+                </button>
 
                 {
                     data.map((product, index) => {
@@ -41,8 +49,14 @@ const HorizontalCartProduct = ({ category, heading }) => {
                                     <img className="object-sclae-down h-full hover:scale-110  transition-all" src={product.productImage[0]} alt="" />
 
                                 </div>
-                                <div>
-
+                                <div className="p-4 grid">
+                                    <h2 className="font-medium text-base md:text-lg text-ellipsis line-clamp-1">{product?.productName}</h2>
+                                    <p className="capitalize text-slate-500">{product?.category}</p>
+                                    <div className="flex gap-3">
+                                        <p className="text-red-600 font-medium">{displayCurrency(product.sellingPrice)}</p>
+                                        <p className="text-slate-500 line-through">{displayCurrency(product.price)}</p>
+                                    </div>
+                                    <button className="bg-red-500 hover:bg-red-700 text-sm text-white px-3 rounded-full py-0.5">Add to cart</button>
                                 </div>
 
 
