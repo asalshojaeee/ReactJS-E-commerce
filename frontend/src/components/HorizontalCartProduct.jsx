@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 
 import displayCurrency from '../helpers/displayCurrency'
@@ -6,6 +6,13 @@ import { FaAngleRight } from 'react-icons/fa6'
 import { FaAngleLeft } from 'react-icons/fa6'
 
 const HorizontalCartProduct = ({ category, heading }) => {
+
+
+    const [scroll, setScroll] = useState(0)
+    const scrollElement=useRef()
+
+
+    
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -27,17 +34,27 @@ const HorizontalCartProduct = ({ category, heading }) => {
     }, [])
 
 
+    const scrollRight=()=>{
+        scrollElement.current.scrollLeft+=300
+    }
+
+    const scrollLeft=()=>{
+        scrollElement.current.scrollLeft-=300
+    }
 
 
     return (
         <div className="containar mx-auto px-4 my-6 relative">
             <h2 className="text-2xl font-bold py-4">{heading}</h2>
-            <div className="flex items-center gap-4 md:gap-6 overflow-scroll scrollbar-none">
+            <div ref={scrollElement} className="flex items-center gap-4 md:gap-6 transition-all overflow-scroll scrollbar-none">
                 <button
-                    className='bg-white shadow-md rounded-full p-1 absolute left-0 text-lg hidden md:block'><FaAngleLeft /></button>
+                onClick={scrollLeft}
+                    className='bg-white shadow-md cursor-pointer  rounded-full p-1 absolute left-0 text-lg hidden md:block'><FaAngleLeft /></button>
 
                 <button
-                    className='bg-white shadow-md rounded-full p-1 absolute right-0 text-lg  hidden md:block'>
+
+                    onClick={scrollRight}
+                    className='bg-white shadow-md cursor-pointer rounded-full p-1 absolute right-0 text-lg  hidden md:block'>
                     <FaAngleRight />
                 </button>
 
@@ -46,7 +63,7 @@ const HorizontalCartProduct = ({ category, heading }) => {
                         return (
                             <div className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow-md flex">
                                 <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[154px] ">
-                                    <img className="object-sclae-down h-full hover:scale-110  transition-all" src={product.productImage[0]} alt="" />
+                                    <img className="object-sclae-down mix-blend-multiply h-full hover:scale-110  transition-all" src={product.productImage[0]} alt="" />
 
                                 </div>
                                 <div className="p-4 grid">
