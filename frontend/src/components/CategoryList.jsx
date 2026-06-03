@@ -25,7 +25,7 @@ const CategoryList = () => {
 
 
     return (
-        <div className="containar mx-auto p-4">
+        <div className="containar mx-auto pt-16">
             <div className="flex items-center gap-4 justify-between overflow-scroll scrollbar-none">
                 {
                     loading ? (
