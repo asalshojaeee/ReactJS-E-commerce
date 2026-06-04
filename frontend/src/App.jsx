@@ -15,6 +15,9 @@ import { AllProducts } from "./pages/AllProducts"
 import Header from "./components/Header"
 import Layout from "./components/Layout"
 import CategoryProduct from "./pages/CategoryProduct"
+
+
+import ProductDetails from './pages/ProductDetails'
 function App() {
 
   const dispatch = useDispatch()
@@ -70,6 +73,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/sign-up" element={<SignUp />} />
+
+
+          <Route path="product/:id" element={<ProductDetails/>}/>
+
+          
 
        
 

@@ -4,7 +4,8 @@ import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 import displayCurrency from '../helpers/displayCurrency'
 import { FaAngleRight } from 'react-icons/fa6'
 import { FaAngleLeft } from 'react-icons/fa6'
-
+import {Link} from 'react-router-dom'
+import addToCart from "../helpers/addToCart";
 const HorizontalCartProduct = ({ category, heading }) => {
 
 
@@ -61,7 +62,7 @@ const HorizontalCartProduct = ({ category, heading }) => {
                 {
                     data.map((product, index) => {
                         return (
-                            <div className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow-md flex">
+                            <Link to={"product/"+product?._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow-md flex">
                                 <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[154px] ">
                                     <img className="object-sclae-down mix-blend-multiply h-full hover:scale-110  transition-all" src={product.productImage[0]} alt="" />
 
@@ -73,12 +74,15 @@ const HorizontalCartProduct = ({ category, heading }) => {
                                         <p className="text-red-600 font-medium">{displayCurrency(product.sellingPrice)}</p>
                                         <p className="text-slate-500 line-through">{displayCurrency(product.price)}</p>
                                     </div>
-                                    <button className="bg-red-500 hover:bg-red-700 text-sm text-white px-3 rounded-full py-0.5">Add to cart</button>
+                                    <button 
+                                    
+                                    onClick={(e)=>addToCart(e,product?._id)}
+                                    className="bg-red-500 cursor-pointer hover:bg-red-700 text-sm text-white px-3 rounded-full py-0.5">Add to cart</button>
                                 </div>
 
 
 
-                            </div>
+                            </Link>
 
                         )
 
