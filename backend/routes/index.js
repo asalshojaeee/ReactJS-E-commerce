@@ -12,7 +12,8 @@ const userLogOut = require('../controller/userLogOut');
 const updateUser = require('../controller/updateUser');
 const getCategoryWiseProduct=require('../controller/getCategoryWiseProduct')
 const getCategoryProduct=require('../controller/getCategoryProduct');
-const updateProductController = require('../controller/updateProduct')
+const updateProductController = require('../controller/updateProduct');
+const getProductDetails = require('../controller/getProductDetails');
 routes.post("/signup",userSignUp)
 routes.post("/signin",userSignIn)
 routes.get("/user-details",authTokenController,userDetails)
@@ -25,6 +26,8 @@ routes.put('/update-product',authTokenController,updateProductController)
 
 routes.get('/get-categoryProduct',getCategoryProduct);
 routes.post('/category-product',getCategoryWiseProduct);
+
+routes.post('/product-details',getProductDetails);
 
 
 module.exports=routes
