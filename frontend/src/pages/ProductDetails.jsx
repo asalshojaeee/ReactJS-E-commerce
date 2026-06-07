@@ -29,7 +29,7 @@ const ProductDetails = () => {
         }
 
         )
-        // setLoading(false)
+        setLoading(false)
         setData(response.data)
     }
 
@@ -42,17 +42,21 @@ const ProductDetails = () => {
 
 
         <div className="containar p-4 mx-auto">
-            <div className=" min-h-[200px]">
+            <div className=" min-h-[200px] flex flex-col lg:flex-row gap-4">
 
-                <div>
-                    <div className="h-96">
+                <div className="h-96 flex flex-col lg:flex-row-reverse gap-4">
+
+                    <div className="lg:h-96 lg:w-96 h-[300px] w-[300px] bg-slate-200">
+
+                    </div>
+                    <div className="h-full">
                         {
                             loading ? (
                                 <div className="flex gap-2 lg:flex-col overflow-scroll scrollbar-none h-full">
                                     {
-                                        productImageListLoading.map((el, index) => {
+                                        productImageListLoading.map(elx => {
                                             return (
-                                                <div className="h-20 w-20 bg-slate-200 rounded"></div>
+                                                <div className="h-20 w-20 bg-slate-200 animate-pulse rounded" key={"loadingImage"}></div>
                                             )
 
                                         })
@@ -61,7 +65,18 @@ const ProductDetails = () => {
 
                             ) :
                                 (
-                                    <div></div>
+                                    <div className="flex gap-2 lg:flex-col overflow-scroll scrollbar-none h-full">
+                                        {
+                                            data.productImage.map((imgURL,index) => {
+                                                return (
+                                                    <div  className="h-20 w-20 bg-slate-200 rounded p-1" key={imgURL}>
+                                                        <img src={imgURL} className="h-full mix-blend-multiply w-full object-scale-down" alt="" />
+                                                    </div>
+                                                )
+
+                                            })
+                                        }
+                                    </div>
                                 )
                         }
                     </div>
