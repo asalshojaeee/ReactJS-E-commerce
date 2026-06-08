@@ -6,6 +6,7 @@ import axios from "axios"
 const ProductDetails = () => {
     const [loading, setLoading] = useState(true)
     const productImageListLoading = new Array(4).fill(null);
+    const [activeImage, setActiveImage] = useState("");
 
     const [data, setData] = useState({
         productName: "",
@@ -30,7 +31,8 @@ const ProductDetails = () => {
 
         )
         setLoading(false)
-        setData(response.data)
+        setData(response.data.data)
+        setActiveImage(response?.data.data.productImage[0])
     }
 
     useEffect(() => {
@@ -41,12 +43,14 @@ const ProductDetails = () => {
     return (
 
 
-        <div className="containar p-4 mx-auto">
+        <div className="container p-4 mx-auto">
             <div className=" min-h-[200px] flex flex-col lg:flex-row gap-4">
 
-                <div className="h-96 flex flex-col lg:flex-row-reverse gap-4">
-
+                <div className="h-96 flex flex-row-reverse gap-4">
                     <div className="lg:h-96 lg:w-96 h-[300px] w-[300px] bg-slate-200">
+                        <img
+                            src={activeImage}
+                            className="h-full w-full object-scale-down mix-blend-multiply" />
 
                     </div>
                     <div className="h-full">
@@ -54,22 +58,25 @@ const ProductDetails = () => {
                             loading ? (
                                 <div className="flex gap-2 lg:flex-col overflow-scroll scrollbar-none h-full">
                                     {
-                                        productImageListLoading.map(elx => {
+                                        productImageListLoading.map((el, index) => {
                                             return (
-                                                <div className="h-20 w-20 bg-slate-200 animate-pulse rounded" key={"loadingImage"}></div>
-                                            )
+                                                <div className="h-20 w-20 bg-slate-200 animate-pulse rounded" key={index}
+                                                >
 
+                                                </div>
+                                            )
                                         })
                                     }
+
                                 </div>
 
                             ) :
                                 (
                                     <div className="flex gap-2 lg:flex-col overflow-scroll scrollbar-none h-full">
                                         {
-                                            data.productImage.map((imgURL,index) => {
+                                            data?.productImage?.map((imgURL, index) => {
                                                 return (
-                                                    <div  className="h-20 w-20 bg-slate-200 rounded p-1" key={imgURL}>
+                                                    <div className="h-20 w-20 bg-slate-200 rounded p-1" key={imgURL}>
                                                         <img src={imgURL} className="h-full mix-blend-multiply w-full object-scale-down" alt="" />
                                                     </div>
                                                 )
@@ -88,6 +95,7 @@ const ProductDetails = () => {
 
                 </div>
                 <div>
+                    product
 
                 </div>
 
