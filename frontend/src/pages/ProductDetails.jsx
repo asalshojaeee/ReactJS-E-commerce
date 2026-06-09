@@ -2,7 +2,9 @@ import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 
 import axios from "axios"
-
+import { FaStarHalf } from "react-icons/fa6";
+import displayCurrency from '../helpers/displayCurrency'
+import { FaStar } from "react-icons/fa6";
 const ProductDetails = () => {
     const [loading, setLoading] = useState(true)
     const productImageListLoading = new Array(4).fill(null);
@@ -38,6 +40,11 @@ const ProductDetails = () => {
     useEffect(() => {
         fetchProductDetail()
     }, [])
+    const handleMouseEnterProduct = (imgUrl) => {
+        setActiveImage(imgUrl)
+
+
+    }
 
 
     return (
@@ -77,7 +84,10 @@ const ProductDetails = () => {
                                             data?.productImage?.map((imgURL, index) => {
                                                 return (
                                                     <div className="h-20 w-20 bg-slate-200 rounded p-1" key={imgURL}>
-                                                        <img src={imgURL} className="h-full mix-blend-multiply w-full object-scale-down" alt="" />
+                                                        <img
+                                                            onClick={() => handleMouseEnterProduct(imgURL)}
+                                                            onMouseEnter={() => handleMouseEnterProduct(imgURL)}
+                                                            src={imgURL} className="h-full cursor-pointer mix-blend-multiply w-full object-scale-down" alt="" />
                                                     </div>
                                                 )
 
@@ -94,8 +104,33 @@ const ProductDetails = () => {
                 <div>
 
                 </div>
-                <div>
-                    product
+                <div className="flex flex-col gap-1">
+                    <p className="bg-red-200 text-red-600 px-2 rounded-full inline-block w-fit">{data?.brandName}</p>
+                    <h2 className="text-2xl lg:text-4xl font-medium">{data?.productName}</h2>
+                    <p className="capitalize text-slate-400">{data.category}</p>
+                    <div className="text-red-600 flex items-center gap-1">
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaStarHalf />
+
+
+                    </div>
+                    <div className="flex items-center gap-2 text-xl font-medium my-1 lg:text-2xl">
+                        <p className="text-red-600">{displayCurrency(data?.sellingPrice)}</p>
+                        <p className="text-red-400 line-through">{displayCurrency(data?.price)}</p>
+
+                    </div>
+                    <div className="flex items-center gap-3 my-2">
+                        <button className="border-2 border-red-600 rounded px-3 py-1 min-w-[100px] text-red-600 font-medium hover:bg-red-600 hover:text-white">Buy</button>
+                        <button className="border-2 border-red-600 rounded px-3 py-1 min-w-[100px] bg-red-600 text-white hover:text-red-600 hover:bg-white">Add To Cart</button>
+
+                    </div>
+                    <div>
+                        <p className="text-slate-600 font-medium my-1">Description:</p>
+                        <p className="">{data?.description}</p>
+                    </div>
 
                 </div>
 
