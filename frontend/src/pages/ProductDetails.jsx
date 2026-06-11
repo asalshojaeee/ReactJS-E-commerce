@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 
 import axios from "axios"
@@ -13,6 +13,7 @@ const ProductDetails = () => {
         x: 0,
         y: 0
     });
+    const [zoom, setZoom] = useState(false);
     const [data, setData] = useState({
         productName: "",
         brandName: "",
@@ -49,7 +50,8 @@ const ProductDetails = () => {
 
     }
 
-    const handleZommImage = (e) => {
+    const handleZommImage = useCallback((e) => {
+        setZoom(true)
         const { left, top, width, height } = e.target.getBoundingClientRect();
         const x = (e.clientX - left) / width
         const y = (e.clientY - top) / height
@@ -57,6 +59,10 @@ const ProductDetails = () => {
             x,
             y
         })
+    }, [zoomImage])
+
+    const handleZoomLeave = () => {
+        setZoom(false)
 
     }
 
@@ -70,18 +76,24 @@ const ProductDetails = () => {
                 <div className="h-96 flex flex-row-reverse gap-4">
                     <div className="lg:h-96 lg:w-96 h-[300px] w-[300px] bg-slate-200 relative">
                         <img
-                            onMouseMove={handleZommImage}
+                        onMouseLeave={handleZoomLeave}
+                            onMouseEnter={handleZommImage}
                             src={activeImage}
                             className="h-full w-full object-scale-down mix-blend-multiply" />
-                        <div className="hidden lg:block absolute min-w-[400px] min-h-[400px]  p-1 -right-[410px] top-0">
-                            <div className="w-full h-full min-h-[400px] min-w-[400px]" style={{
-                                backgroundImage: `url(${activeImage})`,
-                                backgroundRepeat: 'no-repeat',
-                                backgroundPosition: `${zoomImage.x * 100}% ${zoomImage.y * 100}%`
-                            }}>
+                        {
+                            zoom && (
 
-                            </div>
-                        </div>
+                                <div className="hidden lg:block absolute min-w-[400px] min-h-[400px] overflow-hidden p-1 -right-[510px] top-0">
+                                    <div className="w-full h-full min-h-[400px] min-w-[500px] scale-125" style={{
+                                        backgroundImage: `url(${activeImage})`,
+                                        backgroundRepeat: 'no-repeat',
+                                        backgroundPosition: `${zoomImage.x * 100}% ${zoomImage.y * 100}%`
+                                    }}>
+
+                                    </div>
+                                </div>
+                            )
+                        }
 
                     </div>
                     <div className="h-full">
