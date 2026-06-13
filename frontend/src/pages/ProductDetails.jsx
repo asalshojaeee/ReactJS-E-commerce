@@ -79,7 +79,7 @@ const ProductDetails = () => {
                 <div className=" min-h-[200px] flex flex-col lg:flex-row gap-4 mt-15">
 
                     <div className="h-96 flex flex-row-reverse gap-4">
-                        <div className="lg:h-96 lg:w-96 h-[300px] w-[300px] bg-slate-200 relative ">
+                        <div className="lg:h-96 lg:w-96 h-[300px] w-[300px] bg-slate-200 relative p-2">
                             <img
                                 onMouseLeave={handleZoomLeave}
                                 onMouseMove={handleZommImage}
