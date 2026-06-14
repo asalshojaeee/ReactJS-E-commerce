@@ -14,6 +14,7 @@ const getCategoryWiseProduct=require('../controller/getCategoryWiseProduct')
 const getCategoryProduct=require('../controller/getCategoryProduct');
 const updateProductController = require('../controller/updateProduct');
 const getProductDetails = require('../controller/getProductDetails');
+const addToCartController= require('../controller/addToCartController')
 routes.post("/signup",userSignUp)
 routes.post("/signin",userSignIn)
 routes.get("/user-details",authTokenController,userDetails)
@@ -28,6 +29,9 @@ routes.get('/get-categoryProduct',getCategoryProduct);
 routes.post('/category-product',getCategoryWiseProduct);
 
 routes.post('/product-details',getProductDetails);
+
+routes.post('/addtocart',authTokenController,addToCartController)
+
 
 
 module.exports=routes
