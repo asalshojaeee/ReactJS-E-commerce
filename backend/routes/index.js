@@ -15,6 +15,10 @@ const getCategoryProduct=require('../controller/getCategoryProduct');
 const updateProductController = require('../controller/updateProduct');
 const getProductDetails = require('../controller/getProductDetails');
 const addToCartController= require('../controller/addToCartController')
+
+
+
+const countAddToCartProduct = require('../controller/countAddToCartProduct')
 routes.post("/signup",userSignUp)
 routes.post("/signin",userSignIn)
 routes.get("/user-details",authTokenController,userDetails)
@@ -33,5 +37,6 @@ routes.post('/product-details',getProductDetails);
 routes.post('/addtocart',authTokenController,addToCartController)
 
 
+routes.get('/countAddToCartProduct',authTokenController,countAddToCartProduct)
 
 module.exports=routes

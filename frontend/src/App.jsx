@@ -2,8 +2,8 @@ import Home from "./pages/Home"
 import Login from './pages/Login'
 import ForgotPassword from "./pages/ForgotPassword"
 import SignUp from "./pages/SignUp"
-import { useEffect } from "react"
-import { Route, Routes } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { data, Route, Routes } from "react-router-dom"
 import { ToastContainer } from "react-toastify";
 import Context from "./context"
 import "react-toastify/dist/ReactToastify.css";
@@ -21,6 +21,7 @@ import ProductDetails from './pages/ProductDetails'
 function App() {
 
   const dispatch = useDispatch()
+  const [cartProductCount, setCartProductCount] = useState(0)
 
 
   const fetchUserDetails = async () => {
@@ -43,15 +44,35 @@ function App() {
 
 
   }
+
+
+
+
+  const fetchUserAddToCart = async () => {
+    const responseData = await fetch('http://localhost:3000/api/countAddToCartProduct', {
+      method: "get",
+      credentials: 'include'
+    })
+
+
+    const dataApi = await responseData.json()
+
+    setCartProductCount(dataApi?.data?.count)
+
+
+  }
   useEffect(() => {
     fetchUserDetails()
+    fetchUserAddToCart()
 
 
   }, [])
   return (
     <>
       <Context.Provider value={{
-        fetchUserDetails
+        fetchUserDetails,
+        cartProductCount,
+        fetchUserAddToCart
 
       }}>
         <Routes>
@@ -59,27 +80,27 @@ function App() {
 
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
-            <Route path='product-category/:categoryName' element={<CategoryProduct/>}/>
+            <Route path='product-category/:categoryName' element={<CategoryProduct />} />
 
-         
-   
-          <Route path="/admin-panel" element={<AdminPanel />}>
 
-            <Route path="all-users" element={<AllUsers />} />
-            <Route path="all-products" element={<AllProducts />} />
 
-          </Route>
+            <Route path="/admin-panel" element={<AdminPanel />}>
+
+              <Route path="all-users" element={<AllUsers />} />
+              <Route path="all-products" element={<AllProducts />} />
+
+            </Route>
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/sign-up" element={<SignUp />} />
 
 
-          <Route path="product/:id" element={<ProductDetails/>}/>
+          <Route path="product/:id" element={<ProductDetails />} />
 
-          
 
-       
+
+
 
 
         </Routes>
