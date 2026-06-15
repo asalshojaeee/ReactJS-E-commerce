@@ -5,12 +5,14 @@ const addToCartModel = require("../models/cartProduct")
 const countAddToCartProduct = async (req, res) => {
     try {
 
-        const userId = req.userId
+        const userId = req?.userId
 
         const count = await addToCartModel.countDocuments({
             userId: userId
         })
 
+const data = await addToCartModel.find()
+console.log(data)
     res.json({
         data:{
             count:count

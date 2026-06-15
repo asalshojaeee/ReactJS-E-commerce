@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const addToCart = new mongoose.Schema({
     productId: String,
     quantity: Number,
-    suserId: String
+    userId: String
 
 
 }, {

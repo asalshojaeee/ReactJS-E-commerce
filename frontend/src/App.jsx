@@ -57,7 +57,7 @@ function App() {
 
     const dataApi = await responseData.json()
 
-    setCartProductCount(dataApi?.data?.count)
+    setCartProductCount(dataApi?.data.count)
 
 
   }
