@@ -21,7 +21,7 @@ export default function Login() {
         password: ""
     });
     const navigate = useNavigate()
-    const { fetchUserDetails } = useContext(Context)
+    const { fetchUserDetails,fetchUserAddToCart } = useContext(Context)
 
     const handleOnChange = (event) => {
         const { name, value } = event.target
@@ -52,6 +52,7 @@ export default function Login() {
             toast.success(dataApi.message)
             navigate('/')
             fetchUserDetails()
+            fetchUserAddToCart()
 
 
         }

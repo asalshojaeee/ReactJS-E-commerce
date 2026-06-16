@@ -12,7 +12,7 @@ import { Role } from '../common/Role'
 import Context from "../context";
 export default function Header() {
     const [menuDisplay, setMenuDisplay] = useState(false)
-    const contex =useContext(Context)
+    const contex = useContext(Context)
 
     const user = useSelector(state => state?.user?.user);
     const dispatch = useDispatch()
@@ -105,16 +105,19 @@ export default function Header() {
                             }
 
                         </div>
+                        {
+                            user?._id && (<div className="text-2xl cursor-pointer relative">
+                                <span> <FaShoppingCart /></span>
 
-                        <div className="text-2xl cursor-pointer relative">
-                            <span> <FaShoppingCart /></span>
-                            <div className="absolute -top-2 -right-3  bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center">
-                                <p className="text-xs">{contex?.cartProductCount}</p>
+                                <div className="absolute -top-2 -right-3  bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center">
+                                    <p className="text-xs">{contex?.cartProductCount}</p>
 
-                            </div>
+                                </div>
 
 
-                        </div>
+                            </div>)
+                        }
+
                         <div>
                             {
                                 user?._id ? (

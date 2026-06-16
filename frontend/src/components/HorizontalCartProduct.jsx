@@ -1,19 +1,25 @@
 import { useEffect, useRef, useState } from "react"
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
-
+import { useContext } from "react";
+import Context from "../context";
 import displayCurrency from '../helpers/displayCurrency'
 import { FaAngleRight } from 'react-icons/fa6'
 import { FaAngleLeft } from 'react-icons/fa6'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import addToCart from "../helpers/addToCart";
 const HorizontalCartProduct = ({ category, heading }) => {
 
+    const { fetchUserAddToCart } = useContext(Context)
+    const handleAddTocart = async (e, id) => {
+        await addToCart(e, id)
+        fetchUserAddToCart()
 
+    }
     const [scroll, setScroll] = useState(0)
-    const scrollElement=useRef()
+    const scrollElement = useRef()
 
 
-    
+
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -35,12 +41,12 @@ const HorizontalCartProduct = ({ category, heading }) => {
     }, [])
 
 
-    const scrollRight=()=>{
-        scrollElement.current.scrollLeft+=300
+    const scrollRight = () => {
+        scrollElement.current.scrollLeft += 300
     }
 
-    const scrollLeft=()=>{
-        scrollElement.current.scrollLeft-=300
+    const scrollLeft = () => {
+        scrollElement.current.scrollLeft -= 300
     }
 
 
@@ -49,7 +55,7 @@ const HorizontalCartProduct = ({ category, heading }) => {
             <h2 className="text-2xl font-bold py-4">{heading}</h2>
             <div ref={scrollElement} className="flex items-center gap-4 md:gap-6 transition-all overflow-scroll scrollbar-none">
                 <button
-                onClick={scrollLeft}
+                    onClick={scrollLeft}
                     className='bg-white shadow-md cursor-pointer  rounded-full p-1 absolute left-0 text-lg hidden md:block'><FaAngleLeft /></button>
 
                 <button
@@ -62,7 +68,7 @@ const HorizontalCartProduct = ({ category, heading }) => {
                 {
                     data.map((product, index) => {
                         return (
-                            <Link to={"product/"+product?._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow-md flex">
+                            <Link to={"product/" + product?._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow-md flex">
                                 <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[154px] ">
                                     <img className="object-sclae-down mix-blend-multiply h-full hover:scale-110  transition-all" src={product.productImage[0]} alt="" />
 
@@ -74,10 +80,10 @@ const HorizontalCartProduct = ({ category, heading }) => {
                                         <p className="text-red-600 font-medium">{displayCurrency(product.sellingPrice)}</p>
                                         <p className="text-slate-500 line-through">{displayCurrency(product.price)}</p>
                                     </div>
-                                    <button 
-                                    
-                                    onClick={(e)=>addToCart(e,product?._id)}
-                                    className="bg-red-500 cursor-pointer hover:bg-red-700 text-sm text-white px-3 rounded-full py-0.5">Add to cart</button>
+                                    <button
+
+                                        onClick={(e) => handleAddTocart(e, product?._id)}
+                                        className="bg-red-500 cursor-pointer hover:bg-red-700 text-sm text-white px-3 rounded-full py-0.5">Add to cart</button>
                                 </div>
 
 
