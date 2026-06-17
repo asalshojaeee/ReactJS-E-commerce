@@ -1,0 +1,29 @@
+
+const { model } = require("mongoose")
+const addToCartModel = require("../models/cartProduct")
+
+
+const addToCartView = async (req, res) => {
+
+    try {
+        const currentUser = req.userId
+        const allProduct = await addToCartModel.find({
+            userId: userId
+        })
+        res.json({
+            data: allProduct,
+            success: true,
+            error: false
+        })
+
+    } catch (err) {
+        res.json({
+            message: err.message,
+            error: true,
+            success: false
+
+        })
+    }
+
+}
+module.exports = addToCartView

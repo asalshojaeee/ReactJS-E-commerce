@@ -18,6 +18,7 @@ import CategoryProduct from "./pages/CategoryProduct"
 
 
 import ProductDetails from './pages/ProductDetails'
+import Cart from "./pages/Cart"
 function App() {
 
   const dispatch = useDispatch()
@@ -99,6 +100,7 @@ function App() {
           <Route path="product/:id" element={<ProductDetails />} />
 
 
+          <Route path="/cart" element={<Cart />} />
 
 
 

@@ -3,7 +3,7 @@ import Logo from "./Logo"
 import { MdOutlineSearch } from "react-icons/md";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserDetails } from "../store/userSlice";
@@ -106,7 +106,8 @@ export default function Header() {
 
                         </div>
                         {
-                            user?._id && (<div className="text-2xl cursor-pointer relative">
+                            user?._id && (
+                            <Link to={"/cart"} className="text-2xl cursor-pointer relative">
                                 <span> <FaShoppingCart /></span>
 
                                 <div className="absolute -top-2 -right-3  bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center">
@@ -115,7 +116,8 @@ export default function Header() {
                                 </div>
 
 
-                            </div>)
+                            </Link>
+                            )
                         }
 
                         <div>
