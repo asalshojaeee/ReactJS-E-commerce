@@ -54,14 +54,14 @@ const Cart = () => {
                 </div>
 
 
-                <div>
+                <div className="flex flex-col lg:flex-row">
                     <div className="w-full max-w-3xl">
                         {
                             loading ? (
                                 loadingCart.map((el, index) => {
 
                                     return (
-                                        <div key={el+"add to cart loading"} className="w-full bg-slate-200 h-32 my-1 animate-pulse rounded-md">
+                                        <div key={el + "add to cart loading"} className="w-full bg-slate-200 h-32 my-2 animate-pulse rounded-md">
 
 
                                         </div>
@@ -78,6 +78,20 @@ const Cart = () => {
 
                         }
                     </div>
+
+
+                    <div>
+
+
+
+
+                        <div className="mt-5 lg:mt-0">
+                            {loading ? (<div className="h-36 bg-slate-200">
+                                total
+                            </div>) : (<div className="h-36 bg-slate-200">total</div>)}
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
