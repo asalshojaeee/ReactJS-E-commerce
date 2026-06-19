@@ -15,7 +15,7 @@ const Cart = () => {
     const loadingCart = new Array(contex.cartProductCount).fill(null)
     const fetchData = async () => {
         setLoading(true)
-        const response = fetch('http://localhost:3000/api/veiwCartProduct', {
+        const response = await fetch('http://localhost:3000/api/veiwCartProduct', {
             method: "get",
             credentials: "include",
             headers: {
@@ -26,12 +26,11 @@ const Cart = () => {
         })
 
 
-        // setLoading(false)
+        setLoading(false)
         const responseData = await response.json()
         if (responseData.success) {
             setData(responseData.data)
         }
-
 
     }
 
@@ -54,7 +53,7 @@ const Cart = () => {
                 </div>
 
 
-                <div className="flex flex-col lg:flex-row">
+                <div className="flex flex-col lg:flex-row gap-10 lg:justify-between">
                     <div className="w-full max-w-3xl">
                         {
                             loading ? (
@@ -71,8 +70,22 @@ const Cart = () => {
 
                             )
 
-                                : (<div>
-                                </div>
+                                : (
+                                    data.map((product, index) => {
+
+                                        return (
+                                            <div key={product?._id + "add to cart loading"} className="w-full bg-white h-32 my-2  rounded-md">
+                                                <div className="w-28 h-28">
+                                                    <img src={product?.productId?.productImage[0]} alt=""  className="h-full w-full object-scale-down mix-blend-multiply"/>
+                                                </div>
+
+
+
+                                            </div>
+                                        )
+
+                                    })
+
                                 )
 
 
@@ -80,17 +93,16 @@ const Cart = () => {
                     </div>
 
 
-                    <div>
+                    {/* <div> */}
 
 
 
 
-                        <div className="mt-5 lg:mt-0">
-                            {loading ? (<div className="h-36 bg-slate-200">
-                                total
-                            </div>) : (<div className="h-36 bg-slate-200">total</div>)}
-                        </div>
+                    <div className="mt-5 lg:mt-0 w-full max-w-sm">
+                        {loading ? (<div className="h-36 bg-slate-200 border border-slate-200 animate-pulse">
+                        </div>) : (<div className="h-36 bg-slate-200">total</div>)}
                     </div>
+                    {/* </div> */}
 
                 </div>
 
