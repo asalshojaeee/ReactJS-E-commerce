@@ -75,7 +75,7 @@ const Cart = () => {
 
                                         return (
                                             <div key={product?._id + "add to cart loading"} className="w-full bg-white h-32 my-2  rounded-md">
-                                                <div className="w-28 h-28">
+                                                <div className="w-28 h-28 bg-slate-200">
                                                     <img src={product?.productId?.productImage[0]} alt=""  className="h-full w-full object-scale-down mix-blend-multiply"/>
                                                 </div>
 
