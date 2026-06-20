@@ -53,7 +53,7 @@ const Cart = () => {
                 </div>
 
 
-                <div className="flex flex-col lg:flex-row gap-10 lg:justify-between">
+                <div className="flex flex-col lg:flex-row gap-10 lg:justify-between p-4">
                     <div className="w-full max-w-3xl">
                         {
                             loading ? (
@@ -74,9 +74,13 @@ const Cart = () => {
                                     data.map((product, index) => {
 
                                         return (
-                                            <div key={product?._id + "add to cart loading"} className="w-full bg-white h-32 my-2  rounded-md">
-                                                <div className="w-28 h-28 bg-slate-200">
+                                            <div key={product?._id + "add to cart loading"} className="w-full bg-white h-32 my-2  rounded-md grid grid-cols-[128px,1fr]">
+                                                <div className="w-32 h-32 bg-slate-200">
                                                     <img src={product?.productId?.productImage[0]} alt=""  className="h-full w-full object-scale-down mix-blend-multiply"/>
+                                                </div>
+                                                <div className="p-4">
+                                                    <h2 className="text-lg lg:text-xl text-ellipsis line-clamp-1">{product?.productId?.productName}</h2>
+                                                    <p className="capitalize">{product?.productId?.category}</p>
                                                 </div>
 
 
