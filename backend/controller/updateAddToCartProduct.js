@@ -1,12 +1,28 @@
 
 
-
+const addToCartModel = require('../models/cartProduct')
 
 const updateAddToCartProduct = async (req, res) => {
 
 
     try {
-        const currentUserId = req.userId
+        const currentUserId = req.userId;
+        const addToCartProductId = req.body._id
+        const qty = req.body.quantity
+
+        const updateProduct = await addToCartModel.updateOne(addToCartProductId, {
+            ...(qty && { quantity: qty })
+        })
+
+
+
+        res.json({
+            message: "updated",
+            data: updateProduct,
+            error: false,
+            success: true,
+
+        })
     }
 
     catch (err) {
@@ -20,3 +36,5 @@ const updateAddToCartProduct = async (req, res) => {
 
 
 }
+
+module.exports=updateAddToCartProduct
