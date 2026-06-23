@@ -40,6 +40,58 @@ const Cart = () => {
     useEffect(() => {
         fetchData()
     }, [])
+    const increaseQuantity = async (id, qty) => {
+        const response = await fetch('http://localhost:3000/api/update-cart-product', {
+            method: 'post',
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(
+                {
+                    _id: id,
+
+                    quantity: qty + 1
+
+                }
+            )
+
+
+        })
+
+        const responseData = await response.json()
+
+        if (responseData.success) {
+            fetchData()
+        }
+    }
+
+
+    const decreaseQuantity = async (id, qty) => {
+
+        if (qty >= 2) {
+            const response = await fetch('http://localhost:3000/api/update-cart-product', {
+                method: "post",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    _id: id,
+
+                    quantity: qty - 1
+
+                })
+            })
+
+
+            const responseData = await response.json()
+            if (responseData.success) {
+                fetchData()
+            }
+
+        }
+
+    }
 
     return (
         <>
@@ -86,11 +138,11 @@ const Cart = () => {
                                                     <p className="capitalize text-slate-500">{product?.productId?.category}</p>
                                                     <p className="font-medium text-slate-400">{displayCurrency(product?.productId.sellingPrice)}</p>
                                                     <div className="flex items-center gap-3 mt-1">
-                                                        <button className="rounded hover:text-white hover:bg-red-600 flex justify-center items-center border border-red-600 text-red-600 w-6 h-6">-</button>
+                                                        <button className="rounded hover:text-white hover:bg-red-600 flex justify-center items-center border border-red-600 text-red-600 w-6 h-6" onClick={() => decreaseQuantity(product?._id, product?.quantity)}>-</button>
                                                         <span>
                                                             {product?.quantity}
                                                         </span>
-                                                        <button className="rounded hover:text-white hover:bg-red-600 flex justify-center items-center border border-red-600 text-red-600 w-6 h-6">+</button>
+                                                        <button className="rounded hover:text-white hover:bg-red-600 flex justify-center items-center border border-red-600 text-red-600 w-6 h-6" onClick={() => increaseQuantity(product?._id, product?.quantity)}>+</button>
                                                     </div>
                                                 </div>
 

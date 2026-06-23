@@ -10,9 +10,12 @@ const updateAddToCartProduct = async (req, res) => {
         const addToCartProductId = req.body._id
         const qty = req.body.quantity
 
-        const updateProduct = await addToCartModel.updateOne(addToCartProductId, {
-            ...(qty && { quantity: qty })
-        })
+        const updateProduct = await addToCartModel.updateOne(
+            { _id: addToCartProductId },
+            {
+                quantity: qty
+            }
+        )
 
 
 
@@ -37,4 +40,4 @@ const updateAddToCartProduct = async (req, res) => {
 
 }
 
-module.exports=updateAddToCartProduct
+module.exports = updateAddToCartProduct
