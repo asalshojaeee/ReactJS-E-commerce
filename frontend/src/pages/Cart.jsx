@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import { FaS } from "react-icons/fa6"
 import Context from "../context"
 
+import { MdDelete } from "react-icons/md";
 
 import displayCurrency from '../helpers/displayCurrency'
 const Cart = () => {
@@ -93,6 +94,27 @@ const Cart = () => {
 
     }
 
+
+
+    const deleteProduct = async (id) => {
+
+
+        const response = await fetch('http://localhost:3000/api/deletecart-product', {
+            method: "post",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                _id: id,
+
+            })
+        })
+        const dataResponse = await response.json()
+        if (dataResponse.success) {
+            fetchData()
+        }
+    }
+
     return (
         <>
             {/* <Header/> */}
@@ -133,7 +155,15 @@ const Cart = () => {
                                                 <div className="w-32 h-32">
                                                     <img src={product?.productId?.productImage[0]} alt="" className="h-full w-full object-scale-down mix-blend-multiply" />
                                                 </div>
-                                                <div className="p-4">
+                                                <div className="py-2 px-4 relative">
+                                                    <div 
+                                                    onClick={()=>deleteProduct(product?._id)}
+                                                    
+                                                    className="absolute right-0 text-red-600 p-2 hover:bg-red-600 hover:text-white rounded-full text-xl cursor-pointer">
+                                                        <MdDelete />
+
+
+                                                    </div>
                                                     <h2 className="text-lg lg:text-xl text-ellipsis line-clamp-1">{product?.productId?.productName}</h2>
                                                     <p className="capitalize text-slate-500">{product?.productId?.category}</p>
                                                     <p className="font-medium text-slate-400">{displayCurrency(product?.productId.sellingPrice)}</p>
