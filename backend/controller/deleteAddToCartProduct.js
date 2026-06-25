@@ -7,14 +7,14 @@ const deleteAddToCartProduct = async (req, res) => {
     try {
 
         const currentUser = req.userId
-        const addToCartProductId = req.body._id
+        const addToCartProductId = req.body?._id
 
 
         const deleteProduct = await addToCartModel.deleteOne({ _id: addToCartProductId })
         res.json({
             message: "product deleted",
             success: true,
-            error: fasle,
+            error: false,
             data: deleteProduct
         })
     }

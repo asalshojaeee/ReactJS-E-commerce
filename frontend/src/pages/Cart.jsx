@@ -69,35 +69,34 @@ const Cart = () => {
 
 
     const decreaseQuantity = async (id, qty) => {
-
-        if (qty >= 2) {
-            const response = await fetch('http://localhost:3000/api/update-cart-product', {
-                method: "post",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify({
+        const response = await fetch('http://localhost:3000/api/update-cart-product', {
+            method: 'post',
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(
+                {
                     _id: id,
 
                     quantity: qty - 1
 
-                })
-            })
+                }
+            )
 
 
-            const responseData = await response.json()
-            if (responseData.success) {
-                fetchData()
-            }
+        })
 
+        const responseData = await response.json()
+
+        if (responseData.success) {
+            fetchData()
         }
-
     }
 
 
 
     const deleteProduct = async (id) => {
-
 
         const response = await fetch('http://localhost:3000/api/deletecart-product', {
             method: "post",
@@ -117,10 +116,10 @@ const Cart = () => {
 
     return (
         <>
-            {/* <Header/> */}
-            <div className="container mx-auto">
+            <Header />
+            <div className="">
 
-                <div className="text-center text-lg py-2 my-3">
+                <div className="text-center text-lg ">
                     {
                         data.length === 0 && !loading && (
                             <p className="bg-white py-5">No data</p>
@@ -156,10 +155,10 @@ const Cart = () => {
                                                     <img src={product?.productId?.productImage[0]} alt="" className="h-full w-full object-scale-down mix-blend-multiply" />
                                                 </div>
                                                 <div className="py-2 px-4 relative">
-                                                    <div 
-                                                    onClick={()=>deleteProduct(product?._id)}
-                                                    
-                                                    className="absolute right-0 text-red-600 p-2 hover:bg-red-600 hover:text-white rounded-full text-xl cursor-pointer">
+                                                    <div
+                                                        onClick={() => deleteProduct(product?._id)}
+
+                                                        className="absolute right-0 text-red-600 p-2 hover:bg-red-600 hover:text-white rounded-full text-xl cursor-pointer">
                                                         <MdDelete />
 
 
