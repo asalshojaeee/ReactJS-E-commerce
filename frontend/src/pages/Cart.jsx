@@ -100,6 +100,7 @@ const Cart = () => {
 
         const response = await fetch('http://localhost:3000/api/deletecart-product', {
             method: "post",
+            credentials:"include",
             headers: {
                 "content-type": "application/json"
             },
@@ -109,6 +110,7 @@ const Cart = () => {
             })
         })
         const dataResponse = await response.json()
+        console.log(dataResponse)
         if (dataResponse.success) {
             fetchData()
         }
