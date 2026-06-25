@@ -100,7 +100,7 @@ const Cart = () => {
 
         const response = await fetch('http://localhost:3000/api/deletecart-product', {
             method: "post",
-            credentials:"include",
+            credentials: "include",
             headers: {
                 "content-type": "application/json"
             },
@@ -113,12 +113,15 @@ const Cart = () => {
         console.log(dataResponse)
         if (dataResponse.success) {
             fetchData()
+            contex.fetchUserAddToCart()
         }
     }
+    const totalQty = data.reduce((previousValue, currentValue) => previousValue + currentValue.quantity, 0)
+    const totalPrice = data.reduce((prev, curr) => prev + (curr.quantity *curr?.productId?.sellingPrice), 0)
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <div className="">
 
                 <div className="text-center text-lg ">
@@ -167,7 +170,11 @@ const Cart = () => {
                                                     </div>
                                                     <h2 className="text-lg lg:text-xl text-ellipsis line-clamp-1">{product?.productId?.productName}</h2>
                                                     <p className="capitalize text-slate-500">{product?.productId?.category}</p>
-                                                    <p className="font-medium text-slate-400">{displayCurrency(product?.productId.sellingPrice)}</p>
+                                                    <div className="flex items-center justify-between">
+                                                        <p className="font-medium text-red-600 text-lg">{displayCurrency(product?.productId.sellingPrice)}</p>
+                                                        <p className="font-semibold text-slate-400">{displayCurrency(product?.productId.sellingPrice * product.quantity)}</p>
+
+                                                    </div>
                                                     <div className="flex items-center gap-3 mt-1">
                                                         <button className="rounded hover:text-white hover:bg-red-600 flex justify-center items-center border border-red-600 text-red-600 w-6 h-6" onClick={() => decreaseQuantity(product?._id, product?.quantity)}>-</button>
                                                         <span>
@@ -198,7 +205,18 @@ const Cart = () => {
 
                     <div className="mt-5 lg:mt-0 w-full max-w-sm">
                         {loading ? (<div className="h-36 bg-slate-200 border border-slate-200 animate-pulse">
-                        </div>) : (<div className="h-36 bg-slate-200">total</div>)}
+                        </div>) : (<div className="h-36 bg-slate-200">
+                            <h2 className="text-white bg-red-600 px-4 py-1">Summary</h2>
+
+                            <div>
+                                <p>Quantity</p>
+                                <p>{totalQty}</p>
+                            </div>
+                            <div>
+                                <p>Toatal Price</p>
+                                <p>{displayCurrency(totalPrice)}</p>
+                            </div>
+                        </div>)}
                     </div>
                     {/* </div> */}
 
