@@ -117,7 +117,7 @@ const Cart = () => {
         }
     }
     const totalQty = data.reduce((previousValue, currentValue) => previousValue + currentValue.quantity, 0)
-    const totalPrice = data.reduce((prev, curr) => prev + (curr.quantity *curr?.productId?.sellingPrice), 0)
+    const totalPrice = data.reduce((prev, curr) => prev + (curr.quantity * curr?.productId?.sellingPrice), 0)
 
     return (
         <>
@@ -208,15 +208,19 @@ const Cart = () => {
                         </div>) : (<div className="h-36 bg-slate-200">
                             <h2 className="text-white bg-red-600 px-4 py-1">Summary</h2>
 
-                            <div>
+                            <div className="flex items-center justify-between px-4 font-medium text-lg text-slate-600 gap-2">
                                 <p>Quantity</p>
                                 <p>{totalQty}</p>
                             </div>
-                            <div>
+                            <div className="flex items-center justify-between px-4 font-medium text-lg text-slate-600 gap-2">
                                 <p>Toatal Price</p>
                                 <p>{displayCurrency(totalPrice)}</p>
                             </div>
+                        <button className="bg-white p-4 text-red-500 w-full mt-2">Payment</button>
+
                         </div>)}
+
+
                     </div>
                     {/* </div> */}
 

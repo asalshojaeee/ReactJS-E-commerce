@@ -15,7 +15,7 @@ import { AllProducts } from "./pages/AllProducts"
 import Header from "./components/Header"
 import Layout from "./components/Layout"
 import CategoryProduct from "./pages/CategoryProduct"
-
+import SearchProduct from './pages/SearchProduct'
 
 import ProductDetails from './pages/ProductDetails'
 import Cart from "./pages/Cart"
@@ -101,6 +101,9 @@ function App() {
 
 
           <Route path="/cart" element={<Cart />} />
+
+
+          <Route  path="search" element={<SearchProduct/>}/>
 
 
 

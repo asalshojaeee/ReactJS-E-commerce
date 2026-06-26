@@ -3,7 +3,7 @@ import Logo from "./Logo"
 import { MdOutlineSearch } from "react-icons/md";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link, Links } from "react-router-dom";
+import { Link, Links, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserDetails } from "../store/userSlice";
@@ -13,7 +13,7 @@ import Context from "../context";
 export default function Header() {
     const [menuDisplay, setMenuDisplay] = useState(false)
     const contex = useContext(Context)
-
+    const navigate = useNavigate()
     const user = useSelector(state => state?.user?.user);
     const dispatch = useDispatch()
     const handleLoguOut = async () => {
@@ -35,6 +35,18 @@ export default function Header() {
         }
 
     }
+
+    const handleSearch = (e) => {
+
+        const { value } = e.target;
+        if (value) {
+            navigate(`/search?q=${value}`)
+        }
+        else {
+            navigate("/search")
+
+        }
+    }
     return (
         <>
 
@@ -47,7 +59,9 @@ export default function Header() {
                     </div>
 
                     <div className="hidden  md:flex pl-2 items-center w-full justify-between  max-w-sm  rounded-full focus-within:shadow" >
-                        <input className="w-full  outline-none" type="text" placeholder="Search product here..." />
+                        <input
+                            onChange={handleSearch}
+                            className="w-full  outline-none" type="text" placeholder="Search product here..." />
                         <div className="text-lg min-w-[50] h-8 bg-red-600 flex items-center justify-center rounded-r-full text-white">
                             <MdOutlineSearch />
 
@@ -107,16 +121,16 @@ export default function Header() {
                         </div>
                         {
                             user?._id && (
-                            <Link to={"/cart"} className="text-2xl cursor-pointer relative">
-                                <span> <FaShoppingCart /></span>
+                                <Link to={"/cart"} className="text-2xl cursor-pointer relative">
+                                    <span> <FaShoppingCart /></span>
 
-                                <div className="absolute -top-2 -right-3  bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center">
-                                    <p className="text-xs">{contex?.cartProductCount}</p>
+                                    <div className="absolute -top-2 -right-3  bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center">
+                                        <p className="text-xs">{contex?.cartProductCount}</p>
 
-                                </div>
+                                    </div>
 
 
-                            </Link>
+                                </Link>
                             )
                         }
 
