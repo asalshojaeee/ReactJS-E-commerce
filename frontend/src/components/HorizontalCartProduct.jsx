@@ -68,7 +68,7 @@ const HorizontalCartProduct = ({ category, heading }) => {
                 {
                     data.map((product, index) => {
                         return (
-                            <Link to={"product/" + product?._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow-md flex">
+                            <Link to={`/product/${product?._id}`} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow-md flex">
                                 <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[154px] ">
                                     <img className="object-sclae-down mix-blend-multiply h-full hover:scale-110  transition-all" src={product.productImage[0]} alt="" />
 
