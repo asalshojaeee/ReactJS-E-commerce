@@ -13,6 +13,7 @@ import Context from "../context";
 export default function Header() {
     const [menuDisplay, setMenuDisplay] = useState(false)
     const contex = useContext(Context)
+    const [search, setSearch] = useState("");
     const navigate = useNavigate()
     const user = useSelector(state => state?.user?.user);
     const dispatch = useDispatch()
@@ -37,15 +38,11 @@ export default function Header() {
     }
 
     const handleSearch = (e) => {
+        const value = e.target.value;
 
-        const { value } = e.target;
-        if (value) {
-            navigate(`/search?q=${value}`)
-        }
-        else {
-            navigate("/search")
+        setSearch(value);   
 
-        }
+        navigate(`/search?q=${value}`);
     }
     return (
         <>
@@ -60,6 +57,8 @@ export default function Header() {
 
                     <div className="hidden  md:flex pl-2 items-center w-full justify-between  max-w-sm  rounded-full focus-within:shadow" >
                         <input
+                            value={search}
+
                             onChange={handleSearch}
                             className="w-full  outline-none" type="text" placeholder="Search product here..." />
                         <div className="text-lg min-w-[50] h-8 bg-red-600 flex items-center justify-center rounded-r-full text-white">

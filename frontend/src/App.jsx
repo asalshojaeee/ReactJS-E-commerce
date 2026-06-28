@@ -83,6 +83,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path='product-category/:categoryName' element={<CategoryProduct />} />
 
+            <Route path="/search" element={<SearchProduct />} />
 
 
             <Route path="/admin-panel" element={<AdminPanel />}>
@@ -103,7 +104,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
 
 
-          <Route  path="search" element={<SearchProduct/>}/>
 
 
 

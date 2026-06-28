@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
+import VertivalCartProduct from "../components/VertivalCartProduct";
 
 const SearchProduct = () => {
     const [data, setData] = useState([]);
@@ -16,6 +17,8 @@ const SearchProduct = () => {
             );
 
             const dataResponse = await response.json();
+            console.log(dataResponse);
+            console.log(dataResponse.data);
             setLoading(false)
 
             setData(dataResponse.data);
@@ -28,11 +31,9 @@ const SearchProduct = () => {
 
     useEffect(() => {
         fetchProduct();
-    }, []);
-
+    }, [query.search]);
     return (
         <>
-            <Header />
             <div className="container mx-auto p-4">
 
 
@@ -51,21 +52,19 @@ const SearchProduct = () => {
 
                     )
                 }
-                {/* {
+                {
                     data.length !== 0 && !loading && (
-                        data.map((pro,index) => {
-                            return(
-
-
-
-                            )
-
-                        })
-
+                        <VertivalCartProduct data={data} />
                     )
+                }
+
+                {/* {
+                    data.map((item) => (
+                        <div key={item._id}>
+                            {item.productName}
+                        </div>
+                    ))
                 } */}
-
-
             </div>
         </>
     );
