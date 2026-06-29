@@ -17,8 +17,6 @@ const SearchProduct = () => {
             );
 
             const dataResponse = await response.json();
-            console.log(dataResponse);
-            console.log(dataResponse.data);
             setLoading(false)
 
             setData(dataResponse.data);
@@ -43,7 +41,7 @@ const SearchProduct = () => {
                     )
 
                 }
-                <p>Search Results: {data.length}</p>
+                <p className="text-lg font-semibold">Search Results: {data.length}</p>
 
                 {
 

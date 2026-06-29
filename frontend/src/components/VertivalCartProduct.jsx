@@ -18,14 +18,15 @@ const VertivalCartProduct = ({ data = [] }) => {
     }
     return(
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,300px))]  md:gap-6 transition-all overflow-scroll scrollbar-none mt-20">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,300px))]
+        md:justify-between justify-center  md:gap-6 transition-all overflow-scroll scrollbar-none mt-20">
 
 
             {
                 data.map((product, index) => {
                     return (
-                        <Link to={`/product/${product?._id}`} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow-md flex" onClick={scrollTop}>
-                            <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[154px] ">
+                        <Link to={`/product/${product?._id}`} className="w-full min-w-70 md:min-w-[320px] max-w-70 md:max-w-[320px] h-36 bg-white rounded-sm shadow-md flex" onClick={scrollTop}>
+                            <div className="bg-slate-200 h-full p-4 min-w- md:min-w-38.5 ">
                                 <img className="object-sclae-down mix-blend-multiply h-full hover:scale-110  transition-all" src={product.productImage[0]} alt="" />
 
                             </div>

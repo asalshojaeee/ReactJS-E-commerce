@@ -3,7 +3,7 @@ import Logo from "./Logo"
 import { MdOutlineSearch } from "react-icons/md";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link, Links, useNavigate } from "react-router-dom";
+import { Link, Links, useLocation, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserDetails } from "../store/userSlice";
@@ -13,7 +13,9 @@ import Context from "../context";
 export default function Header() {
     const [menuDisplay, setMenuDisplay] = useState(false)
     const contex = useContext(Context)
-    const [search, setSearch] = useState("");
+    const searchInput = useLocation()
+
+    const [search, setSearch] = useState(searchInput?.search?.split("=")[1]);
     const navigate = useNavigate()
     const user = useSelector(state => state?.user?.user);
     const dispatch = useDispatch()
@@ -40,7 +42,7 @@ export default function Header() {
     const handleSearch = (e) => {
         const value = e.target.value;
 
-        setSearch(value);   
+        setSearch(value);
 
         navigate(`/search?q=${value}`);
     }
@@ -60,7 +62,7 @@ export default function Header() {
                             value={search}
 
                             onChange={handleSearch}
-                            className="w-full  outline-none" type="text" placeholder="Search product here..." />
+                            className="w-full outline-none" type="text" placeholder="Search product here..." />
                         <div className="text-lg min-w-[50] h-8 bg-red-600 flex items-center justify-center rounded-r-full text-white">
                             <MdOutlineSearch />
 
