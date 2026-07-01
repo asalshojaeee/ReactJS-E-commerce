@@ -1,22 +1,47 @@
 import { useParams } from "react-router-dom"
-
+import CategoryProductWiseDisplay from "../components/CategoryProductWiseDisplay";
 import productCategory from '../helpers/productCategory'
+import { useState } from "react";
+import VertivalCartProduct from "../components/VertivalCartProduct";
 const CategoryProduct = () => {
     const params = useParams();//get params
+    const [data, setData] = useState([]);
+    const [loading, setLoadin] = useState(false);
+    const [selectCategory, setSelectCategory] = useState({})
+
+    const fetchData = async () => {
+        const response = await fetch();
+        const responseData = response.json()
+        setData(responseData?.data || [])
+
+
+
+    }
+
+
+    const handleSelectCategory = (e) => {
+        const { name, value, checked } = e.target;
+        setSelectCategory((preve) => {
+            return {
+                ...preve,
+                [value]: checked
+            }
+        })
+    }
     return (
         <div className="container  p-20">
 
 
 
             {/* desktop */}
-            <div className="hidden lg:grid grid-cols-5">
+            <div className="hidden lg:flex gap-5">
 
 
 
 
 
                 {/* left */}
-                <div className="bg-white p-2 min-h-[calc(100vh-120px)]">
+                <div className="bg-white p-2 min-h-[calc(100vh-120px)] overflow-y-scroll">
 
                     <div className=" ">
                         <h3 className="text-lg uppercase font-base border-b border-slate-300 p-2 text-slate-500">Sort by</h3>
@@ -56,8 +81,12 @@ const CategoryProduct = () => {
                                 productCategory.map((categoryName, index) => {
 
                                     return (
-                                        <div>
-                                            <input type="checkbox" name={"category"} id={categoryName?.value}/>
+                                        <div className="flex items-center gap-3">
+                                            <input type="checkbox"
+
+                                                onChange={handleSelectCategory}
+                                                value={categoryName?.value}
+                                                name={"category"} id={categoryName?.value} />
                                             <label htmlFor={categoryName?.value}>{categoryName?.lable}</label>
                                         </div>
                                     )
@@ -74,7 +103,12 @@ const CategoryProduct = () => {
 
 
                 {/* right */}
-                <div>dis</div>
+                <div className="w-full">
+                    {data.length !== 0 && !loading && (
+
+                        <VertivalCartProduct data={data} />
+                    )}
+                </div>
             </div>
 
         </div>
