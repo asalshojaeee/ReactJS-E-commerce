@@ -1,16 +1,33 @@
 import { useParams } from "react-router-dom"
 import CategoryProductWiseDisplay from "../components/CategoryProductWiseDisplay";
 import productCategory from '../helpers/productCategory'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VertivalCartProduct from "../components/VertivalCartProduct";
 const CategoryProduct = () => {
     const params = useParams();//get params
     const [data, setData] = useState([]);
     const [loading, setLoadin] = useState(false);
     const [selectCategory, setSelectCategory] = useState({})
+    const [filterCategortList, setFilterCategoryList] = useState([])
+
+
+
+
+
+
 
     const fetchData = async () => {
-        const response = await fetch();
+        const response = await fetch('http://localhost:3000/api/filterproduct', {
+            method: "post",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                category: filterCategortList
+            })
+
+
+        });
         const responseData = response.json()
         setData(responseData?.data || [])
 
@@ -28,6 +45,20 @@ const CategoryProduct = () => {
             }
         })
     }
+
+    useEffect(() => {
+        fetchData()
+    }, [filterCategortList])
+    useEffect(() => {
+        const arrayOfCategory = Object.keys(selectCategory).map(categoryKeyName => {
+            if (selectCategory[categoryKeyName]) {
+                return categoryKeyName
+            }
+            return null
+        }).filter(el => el)
+        setFilterCategoryList(arrayOfCategory)
+
+    }, [selectCategory])
     return (
         <div className="container  p-20">
 
@@ -83,7 +114,7 @@ const CategoryProduct = () => {
                                     return (
                                         <div className="flex items-center gap-3">
                                             <input type="checkbox"
-
+                                                checked={selectCategory[categoryName?.value]}
                                                 onChange={handleSelectCategory}
                                                 value={categoryName?.value}
                                                 name={"category"} id={categoryName?.value} />
