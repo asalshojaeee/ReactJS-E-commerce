@@ -82,7 +82,7 @@ const CategoryProduct = () => {
             }
             return `category-${el}&&`
         })
-        navigate('/product-category?'+urlFormat.join(""))
+        navigate('/product-category?' + urlFormat.join(""))
 
     }, [selectCategory])
     return (
@@ -161,10 +161,18 @@ const CategoryProduct = () => {
 
                 {/* right */}
                 <div className="w-full">
-                    {data.length !== 0 && !loading && (
+                    <p className="font-medium text-slate-500 ">Search results:{data.length}</p>
+                    <div>
+                        
+                            {
+                                data.length !== 0 && !loading && (
 
-                        <VertivalCartProduct data={data} />
-                    )}
+                                    <VertivalCartProduct data={data} />
+                                )
+                            }
+                        
+
+                    </div>
                 </div>
             </div>
 
