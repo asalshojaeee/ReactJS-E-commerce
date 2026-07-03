@@ -11,11 +11,6 @@ const CategoryProduct = () => {
     const [filterCategortList, setFilterCategoryList] = useState([])
 
 
-
-
-
-
-
     const fetchData = async () => {
         const response = await fetch('http://localhost:3000/api/filterproduct', {
             method: "post",
@@ -28,7 +23,7 @@ const CategoryProduct = () => {
 
 
         });
-        const responseData = response.json()
+        const responseData = await response.json()
         setData(responseData?.data || [])
 
 
