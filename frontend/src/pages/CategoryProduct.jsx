@@ -1,15 +1,35 @@
-import { useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import CategoryProductWiseDisplay from "../components/CategoryProductWiseDisplay";
 import productCategory from '../helpers/productCategory'
 import { useEffect, useState } from "react";
 import VertivalCartProduct from "../components/VertivalCartProduct";
-const CategoryProduct = () => {
-    const params = useParams();//get params
-    const [data, setData] = useState([]);
-    const [loading, setLoadin] = useState(false);
-    const [selectCategory, setSelectCategory] = useState({})
-    const [filterCategortList, setFilterCategoryList] = useState([])
 
+
+
+const CategoryProduct = () => {
+
+    const params = useParams();
+    const location = useLocation()
+
+    const urlSearch = new URLSearchParams(location.search)
+
+    const urlCategoryListInArray = urlSearch.getAll("category")
+    const urlCategoryListObject = {}
+
+
+
+
+
+    urlCategoryListInArray.forEach(el => {
+        urlCategoryListObject[el] = true
+    })
+
+
+    const [data, setData] = useState([]);
+    const navigate = useNavigate()
+    const [loading, setLoadin] = useState(false);
+    const [selectCategory, setSelectCategory] = useState(urlCategoryListObject)
+    const [filterCategortList, setFilterCategoryList] = useState([])
 
     const fetchData = async () => {
         const response = await fetch('http://localhost:3000/api/filterproduct', {
@@ -52,6 +72,17 @@ const CategoryProduct = () => {
             return null
         }).filter(el => el)
         setFilterCategoryList(arrayOfCategory)
+
+
+
+
+        const urlFormat = arrayOfCategory.map((el, index) => {
+            if ((arrayOfCategory.length - 1) == index) {
+                return `category-${el}`
+            }
+            return `category-${el}&&`
+        })
+        navigate('/product-category?'+urlFormat.join(""))
 
     }, [selectCategory])
     return (
