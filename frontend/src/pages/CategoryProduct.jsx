@@ -30,7 +30,7 @@ const CategoryProduct = () => {
     const [loading, setLoadin] = useState(false);
     const [selectCategory, setSelectCategory] = useState(urlCategoryListObject)
     const [filterCategortList, setFilterCategoryList] = useState([])
-
+    const [sortBy, setSortBy] = useState("")
     const fetchData = async () => {
         const response = await fetch('http://localhost:3000/api/filterproduct', {
             method: "post",
@@ -85,6 +85,26 @@ const CategoryProduct = () => {
         navigate('/product-category?' + urlFormat.join(""))
 
     }, [selectCategory])
+
+
+
+    const handleOnChangeSortBy = (e) => {
+
+        const { value } = e.target;
+        setSortBy(value)
+        if (value === "asc") {
+
+            setData(preve => preve.sort((a, b) => a.sellingPrice - b.sellingPrice))
+        }
+        if (value === "dec") {
+
+            setData(preve => preve.sort((a, b) => b.sellingPrice - a.sellingPrice))
+        }
+
+    }
+    useEffect(()=>{
+
+    },[sortBy])
     return (
         <div className="container  p-20">
 
@@ -107,7 +127,11 @@ const CategoryProduct = () => {
 
 
                             <div className="flex items-center gap-3">
-                                <input type="radio" name="sortBy" />
+                                <input
+                                    value={"asc"}
+                                    checked={sortBy === 'asc'}
+                                    onChange={handleOnChangeSortBy}
+                                    type="radio" name="sortBy" />
                                 <label htmlFor="">Price Low to High</label>
 
                             </div>
@@ -115,7 +139,11 @@ const CategoryProduct = () => {
 
                             <div className="flex items-center gap-3">
 
-                                <input type="radio" name="sortBy" />
+                                <input
+                                    value={"dec"}
+                                    checked={sortBy==='dec'}
+                                    onChange={handleOnChangeSortBy}
+                                    type="radio" name="sortBy" />
                                 <label htmlFor="">Price High to Low</label>
                             </div>
 
@@ -163,14 +191,14 @@ const CategoryProduct = () => {
                 <div className="w-full">
                     <p className="font-medium text-slate-500 ">Search results:{data.length}</p>
                     <div>
-                        
-                            {
-                                data.length !== 0 && !loading && (
 
-                                    <VertivalCartProduct data={data} />
-                                )
-                            }
-                        
+                        {
+                            data.length !== 0 && !loading && (
+
+                                <VertivalCartProduct data={data} />
+                            )
+                        }
+
 
                     </div>
                 </div>
