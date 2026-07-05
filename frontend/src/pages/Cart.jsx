@@ -18,7 +18,6 @@ const Cart = () => {
 
     const loadingCart = new Array(contex.cartProductCount).fill(null)
     const fetchData = async () => {
-        setLoading(true)
         const response = await fetch('http://localhost:3000/api/veiwCartProduct', {
             method: "get",
             credentials: "include",
@@ -30,16 +29,22 @@ const Cart = () => {
         })
 
 
-        setLoading(false)
         const responseData = await response.json()
         if (responseData.success) {
             setData(responseData.data)
         }
 
     }
+    const handleLoading = async () => {
+        await fetchData()
 
+    }
     useEffect(() => {
-        fetchData()
+        setLoading(true)
+
+        handleLoading()
+        setLoading(false)
+
     }, [])
     const increaseQuantity = async (id, qty) => {
         const response = await fetch('http://localhost:3000/api/update-cart-product', {
@@ -141,7 +146,7 @@ const Cart = () => {
                                 loadingCart.map((el, index) => {
 
                                     return (
-                                        <div key={el + "add to cart loading"} className="w-full bg-slate-200 h-32 my-2 animate-pulse rounded-md">
+                                        <div key={el + "add to cart loading" + index} className="w-full bg-slate-200 h-32 my-2 animate-pulse rounded-md">
 
 
                                         </div>
@@ -216,7 +221,7 @@ const Cart = () => {
                                 <p>Toatal Price</p>
                                 <p>{displayCurrency(totalPrice)}</p>
                             </div>
-                        <button className="bg-white p-4 text-red-500 w-full mt-2">Payment</button>
+                            <button className="bg-white p-4 text-red-500 w-full mt-2">Payment</button>
 
                         </div>)}
 
