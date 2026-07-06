@@ -168,7 +168,7 @@ const Cart = () => {
                                                     <div
                                                         onClick={() => deleteProduct(product?._id)}
 
-                                                        className="absolute right-0 text-red-600 p-2 hover:bg-red-600 hover:text-white rounded-full text-xl cursor-pointer">
+                                                        className="absolute right-0 text-orange-400 p-2 hover:bg-orange-400 hover:text-white rounded-full text-xl cursor-pointer">
                                                         <MdDelete />
 
 
@@ -176,16 +176,16 @@ const Cart = () => {
                                                     <h2 className="text-lg lg:text-xl text-ellipsis line-clamp-1">{product?.productId?.productName}</h2>
                                                     <p className="capitalize text-slate-500">{product?.productId?.category}</p>
                                                     <div className="flex items-center justify-between">
-                                                        <p className="font-medium text-red-600 text-lg">{displayCurrency(product?.productId.sellingPrice)}</p>
+                                                        <p className="font-medium text-orange-400 text-lg">{displayCurrency(product?.productId.sellingPrice)}</p>
                                                         <p className="font-semibold text-slate-400">{displayCurrency(product?.productId.sellingPrice * product.quantity)}</p>
 
                                                     </div>
                                                     <div className="flex items-center gap-3 mt-1">
-                                                        <button className="rounded hover:text-white hover:bg-red-600 flex justify-center items-center border border-red-600 text-red-600 w-6 h-6" onClick={() => decreaseQuantity(product?._id, product?.quantity)}>-</button>
+                                                        <button className="rounded hover:text-white hover:bg-orange-400 flex justify-center items-center border border-blue-800 text-orange-400 w-6 h-6" onClick={() => decreaseQuantity(product?._id, product?.quantity)}>-</button>
                                                         <span>
                                                             {product?.quantity}
                                                         </span>
-                                                        <button className="rounded hover:text-white hover:bg-red-600 flex justify-center items-center border border-red-600 text-red-600 w-6 h-6" onClick={() => increaseQuantity(product?._id, product?.quantity)}>+</button>
+                                                        <button className="rounded hover:text-white hover:bg-orange-400 flex justify-center items-center border border-blue-800 text-orange-400 w-6 h-6" onClick={() => increaseQuantity(product?._id, product?.quantity)}>+</button>
                                                     </div>
                                                 </div>
 
@@ -211,7 +211,7 @@ const Cart = () => {
                     <div className="mt-5 lg:mt-0 w-full max-w-sm">
                         {loading ? (<div className="h-36 bg-slate-200 border border-slate-200 animate-pulse">
                         </div>) : (<div className="h-36 bg-slate-200">
-                            <h2 className="text-white bg-red-600 px-4 py-1">Summary</h2>
+                            <h2 className="text-white bg-orange-400 px-4 py-1">Summary</h2>
 
                             <div className="flex items-center justify-between px-4 font-medium text-lg text-slate-600 gap-2">
                                 <p>Quantity</p>
@@ -221,7 +221,7 @@ const Cart = () => {
                                 <p>Toatal Price</p>
                                 <p>{displayCurrency(totalPrice)}</p>
                             </div>
-                            <button className="bg-white p-4 text-red-500 w-full mt-2">Payment</button>
+                            <button className="bg-white p-4 text-orange-400 w-full mt-2">Payment</button>
 
                         </div>)}
 

@@ -65,7 +65,7 @@ export const ChangeUserRole = (
 
                     </select>
                 </div>
-                <button className="w-fit mx-auto block cursor-pointar py-2 px-3 rounded-full bg-red-500 text-white hover:bg-red-700"
+                <button className="w-fit mx-auto block cursor-pointar py-2 px-3 rounded-full bg-orange-400 text-white hover:bg-orange-400"
                     onClick={updateUserRole}
                 >Change Role</button>
 

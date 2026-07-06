@@ -34,13 +34,13 @@ const VertivalCartProduct = ({ data = [] }) => {
                                 <h2 className="font-medium text-base md:text-lg text-ellipsis line-clamp-1">{product?.productName}</h2>
                                 <p className="capitalize text-slate-500">{product?.category}</p>
                                 <div className="flex gap-3">
-                                    <p className="text-red-600 font-medium">{displayCurrency(product.sellingPrice)}</p>
+                                    <p className="text-orange-400 font-medium">{displayCurrency(product.sellingPrice)}</p>
                                     <p className="text-slate-500 line-through">{displayCurrency(product.price)}</p>
                                 </div>
                                 <button
 
                                     onClick={(e) => handleAddTocart(e, product?._id)}
-                                    className="bg-red-500 cursor-pointer hover:bg-red-700 text-sm text-white px-3 rounded-full py-0.5">Add to cart</button>
+                                    className="bg-orange-400 cursor-pointer hover:bg-orange-400 text-sm text-white px-3 rounded-full py-0.5">Add to cart</button>
                             </div>
 
 

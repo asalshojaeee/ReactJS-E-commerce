@@ -121,7 +121,7 @@ const UploadProduct = ({ onClose,fetchData }) => {
                     <h2 className="font-bold text-lg">Upload Product</h2>
                     <div
                         onClick={onClose}
-                        className="w-fit ml-auto text-2xl hover:text-red-600 cursor-pointer">
+                        className="w-fit ml-auto text-2xl hover:text-orange-400 cursor-pointer">
                         <IoMdClose />
 
                     </div>
@@ -201,7 +201,7 @@ const UploadProduct = ({ onClose,fetchData }) => {
 
                                                     <div
                                                         onClick={() => handleDeleteProductImage(index)}
-                                                        className="absolute cursor-pointer bottom-0 right-0 p-1 text-white bg-red-600 rounded-full hidden group-hover:block">
+                                                        className="absolute cursor-pointer bottom-0 right-0 p-1 text-white bg--600 rounded-full hidden group-hover:block">
                                                         <MdDelete />
                                                     </div>
                                                 </div>
@@ -213,7 +213,7 @@ const UploadProduct = ({ onClose,fetchData }) => {
                                 </div>
 
                             ) : (
-                                <p className="text-red-500 text-xs">Please upload product image</p>
+                                <p className="text-orange-400 text-xs">Please upload product image</p>
                             )
                         }
 
@@ -246,7 +246,7 @@ const UploadProduct = ({ onClose,fetchData }) => {
                         id="description" placeholder="Enter product description" className="h-28 bg-slate-100 p-1" rows={3}>
                     </textarea>
 
-                    <button className="px-3 py-1 bg-red-600 text-white mb-5 hover:bg-red-700">Upload Product</button>
+                    <button className="px-3 py-1 bg-orange-400 text-white mb-5 hover:bg-orange-400">Upload Product</button>
                 </form>
             </div>
             {

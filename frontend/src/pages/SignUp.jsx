@@ -209,13 +209,13 @@ const SignUp = () => {
                                     </div>
 
                                 </div>
-                                <Link className='block ml-auto w-fit hover:underline hover:text-red-600' to={'/forgot-password'}>forget password?</Link>
+                                <Link className='block ml-auto w-fit hover:underline hover:text-orange-400' to={'/forgot-password'}>forget password?</Link>
 
                             </div>
 
-                            <button className='text-white cursor-pointer bg-red-600 px-6 py-2 w-full max-w-[150px] rounded-full hover:scale-110 transition-all mx-auto block mt-6'>Sign Up</button>
+                            <button className='text-white cursor-pointer bg-orange-400 px-6 py-2 w-full max-w-[150px] rounded-full hover:scale-110 transition-all mx-auto block mt-6'>Sign Up</button>
                         </form>
-                        <p className='my-4'>Already have account?<Link className='text-red-600 hover:text-red-500' to={'/login'}>Login</Link></p>
+                        <p className='my-4'>Already have account?<Link className='text-orange-400 hover:text-orange-400' to={'/login'}>Login</Link></p>
 
                     </div>
                 </div>

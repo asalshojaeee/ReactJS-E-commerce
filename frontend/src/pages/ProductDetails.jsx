@@ -164,14 +164,14 @@ const ProductDetails = () => {
                             <p className=" bg-slate-200 animate-pulse h-6 lg:h-8 rounded-full inline-block w-full"></p>
                             <h2 className="text-2xl lg:text-4xl font-medium bg-slate-200 animate-pulse h-6 w-full"></h2>
                             <p className="capitalize text-slate-400 animate-pulse h-6 bg-slate-200 min-w-[100px] w-full lg:h-8 "></p>
-                            <div className="text-red-600 flex bg-slate-200 h-6 animate-pulse items-center gap-1 w-full lg:h-8 ">
+                            <div className="text-orange-400 flex bg-slate-200 h-6 animate-pulse items-center gap-1 w-full lg:h-8 ">
 
 
 
                             </div>
                             <div className="flex items-center gap-2 text-xl font-medium my-1 lg:text-2xl h-6 animate-pulse bg-slate-200 w-full lg:h-8 ">
-                                <p className="text-red-600 bg-slate-200 w-full"></p>
-                                <p className="text-red-400 line-through bg-slate-200 w-full"></p>
+                                <p className="text-orange-400 bg-slate-200 w-full"></p>
+                                <p className="text-orange-400 line-through bg-slate-200 w-full"></p>
 
                             </div>
                             <div className="flex items-center gap-3 my-2 w-full">
@@ -189,10 +189,10 @@ const ProductDetails = () => {
                             (
 
                                 <div className="flex flex-col gap-1">
-                                    <p className="bg-red-200 text-red-600 px-2 rounded-full inline-block w-fit">{data?.brandName}</p>
+                                    <p className="bg-orange-400 text-orange-400 px-2 rounded-full inline-block w-fit">{data?.brandName}</p>
                                     <h2 className="text-2xl lg:text-4xl font-medium">{data?.productName}</h2>
                                     <p className="capitalize text-slate-400">{data.category}</p>
-                                    <div className="text-red-600 flex items-center gap-1">
+                                    <div className="text-orange-400 flex items-center gap-1">
                                         <FaStar />
                                         <FaStar />
                                         <FaStar />
@@ -202,13 +202,13 @@ const ProductDetails = () => {
 
                                     </div>
                                     <div className="flex items-center gap-2 text-xl font-medium my-1 lg:text-2xl">
-                                        <p className="text-red-600">{displayCurrency(data?.sellingPrice)}</p>
-                                        <p className="text-red-400 line-through">{displayCurrency(data?.price)}</p>
+                                        <p className="text-orange-400">{displayCurrency(data?.sellingPrice)}</p>
+                                        <p className="text-orange-400 line-through">{displayCurrency(data?.price)}</p>
 
                                     </div>
                                     <div className="flex items-center gap-3 my-2">
-                                        <button className="border-2 border-red-600 rounded px-3 py-1 min-w-[100px] text-red-600 font-medium hover:bg-red-600 hover:text-white" onClick={(e) => handleByProduct(e, data?._id)}>Buy</button>
-                                        <button className="border-2 border-red-600 rounded px-3 py-1 min-w-[100px] bg-red-600 text-white hover:text-red-600 hover:bg-white" onClick={(e) => handleAddToCart(e, data?._id)}>Add To Cart</button>
+                                        <button className="border-2 border-blue-800 rounded px-3 py-1 min-w-[100px] text-orange-400 font-medium hover:bg-orange-400 hover:text-white" onClick={(e) => handleByProduct(e, data?._id)}>Buy</button>
+                                        <button className="border-2 border-blue-800 rounded px-3 py-1 min-w-[100px] bg-orange-400 text-white hover:text-orange-400 hover:bg-white" onClick={(e) => handleAddToCart(e, data?._id)}>Add To Cart</button>
 
                                     </div>
                                     <div>

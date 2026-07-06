@@ -1,5 +1,5 @@
 
-import Logo from "./Logo"
+import l2 from "../assests/l2.jpg"
 import { MdOutlineSearch } from "react-icons/md";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
@@ -55,7 +55,7 @@ export default function Header() {
 
                     <div className="">
 
-                        <Link to={'/'}><Logo w={100} h={50} /></Link>
+                        <Link to={'/'}><img src={l2} className="w-20 h-20 object-scale-down mix-blend-multiply" /></Link>
                     </div>
 
                     <div className="hidden  md:flex pl-2 items-center w-full justify-between  max-w-sm  rounded-full focus-within:shadow" >
@@ -64,7 +64,7 @@ export default function Header() {
 
                             onChange={handleSearch}
                             className="w-full outline-none" type="text" placeholder="Search product here..." />
-                        <div className="text-lg min-w-[50] h-8 bg-red-600 flex items-center justify-center rounded-r-full text-white">
+                        <div className="text-lg min-w-[50] h-8 bg-orange-400 flex items-center justify-center rounded-r-full text-white">
                             <MdOutlineSearch />
 
                         </div>
@@ -126,7 +126,7 @@ export default function Header() {
                                 <Link to={"/cart"} className="text-2xl cursor-pointer relative">
                                     <span> <FaShoppingCart /></span>
 
-                                    <div className="absolute -top-2 -right-3  bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center">
+                                    <div className="absolute -top-2 -right-3  bg-orange-400 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center">
                                         <p className="text-xs">{contex?.cartProductCount}</p>
 
                                     </div>
@@ -142,11 +142,11 @@ export default function Header() {
                                     <button
                                         onClick={handleLoguOut}
 
-                                        className="px-3 bg-red-600 py-1 rounded-full text-white cursor-pointer hover:bg-red-700">
+                                        className="px-3 bg-orange-400 py-1 rounded-full text-white cursor-pointer hover:bg-orange-400">
                                         log out</button>
                                 ) : (
                                     <Link to={"/login"}
-                                        className="px-3 bg-red-600 py-1 rounded-full text-white cursor-pointer hover:bg-red-700">
+                                        className="px-3 bg-orange-400 py-1 rounded-full text-white cursor-pointer hover:bg-orange-400">
                                         login
                                     </Link>
                                 )
