@@ -30,6 +30,7 @@ export default function Header() {
         if (data.sucesss) {
             toast.success(data.message)
             dispatch(setUserDetails(null))
+            navigate('/')
         }
 
         if (data.error) {
